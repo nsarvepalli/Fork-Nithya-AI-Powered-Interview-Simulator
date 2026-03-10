@@ -1,7 +1,69 @@
 # HireReady
 
-HireReady is an AI-powered mock interview platform with a FastAPI backend and a React + Vite frontend.
-Users can sign up, run tailored interview sessions, save interview history, manage profile/account settings, and upload/manage resumes for context-aware interview prompts.
+**AI-Powered Mock Interview Platform for Job Seekers**
+
+HireReady is an intelligent interview preparation platform that simulates real interview experiences using advanced AI technology. Designed to help job seekers practice and perfect their interview skills, HireReady provides personalized, context-aware mock interviews that adapt to your background, target role, and experience level.
+
+## About the Project
+
+### The Problem We Solve
+
+Landing a job interview is challenging, but performing well in the interview itself is where many candidates struggle. Traditional interview preparation methods have significant limitations:
+
+- 🚫 **Limited Practice Opportunities:** Friends and family aren't professional interviewers and can't provide industry-specific questions
+- 💰 **Expensive Interview Coaches:** Professional coaching costs hundreds of dollars per session
+- ⏰ **Scheduling Constraints:** Coordinating practice sessions with others is time-consuming
+- 📊 **No Progress Tracking:** Hard to see improvement over time without structured feedback
+- 🎯 **Generic Questions:** Most practice resources don't tailor questions to your specific resume or target role
+
+### Our Solution
+
+HireReady leverages OpenAI's GPT-4 to create an intelligent interview coach that's available 24/7. The platform provides:
+
+- **Personalized Interviews:** AI analyzes your resume and job description to ask relevant, role-specific questions
+- **Realistic Experience:** Natural conversation flow with follow-up questions based on your responses
+- **Flexible Practice:** Choose interview type (Technical/Behavioral/Mixed), difficulty level, and number of questions
+- **Progress Tracking:** Complete history of all interview sessions with detailed transcripts
+- **Privacy & Convenience:** Practice from home without judgment, at any time that suits you
+- **Cost-Effective:** One platform for unlimited practice sessions
+
+### Who Is This For?
+
+- 🎓 **Recent Graduates:** Preparing for first job interviews
+- 💼 **Career Switchers:** Transitioning to new industries or roles
+- 📈 **Professionals:** Preparing for promotions or senior-level positions
+- 🔄 **Active Job Seekers:** Anyone currently interviewing and wanting to improve
+- 🧪 **Continuous Learners:** Professionals who want to stay sharp
+
+### How It Works
+
+1. **Sign Up:** Create your free account with a username and password
+2. **Upload Resume:** Add your resume (PDF or TXT) for personalized questions
+3. **Configure Interview:** Select type (Technical/Behavioral/Mixed), difficulty level, and question count
+4. **Practice:** Engage in a natural conversation with the AI interviewer
+5. **Review:** Access your complete interview history and track your progress
+6. **Improve:** Repeat with different configurations to cover various scenarios
+
+### Key Differentiators
+
+- ✨ **AI-Powered Intelligence:** Uses GPT-4 for natural, contextual conversations
+- 📝 **Resume-Aware Questions:** Questions tailored to your actual experience and skills
+- 🎯 **Job-Specific Preparation:** Paste job descriptions to practice for specific roles
+- 📊 **Complete History:** Never lose track of your practice sessions
+- 🖼️ **Professional Profile:** Manage your profile with photo and account settings
+- 🔒 **Secure & Private:** Your data is protected with JWT authentication
+
+## Project Status
+
+✅ **Fully Functional** - All core features implemented and operational
+
+- User authentication and authorization with JWT
+- AI-powered interview sessions with customizable parameters
+- Interview history tracking with detailed message timeline
+- Profile management with photo upload and account settings
+- Resume upload and management system
+- PostgreSQL database integration
+- Complete frontend UI with responsive design
 
 ## Contributors
 
@@ -11,29 +73,81 @@ Users can sign up, run tailored interview sessions, save interview history, mana
 
 ## Tech Stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS, Axios, React Router
-- **Backend:** FastAPI, Uvicorn, OpenAI SDK, PyJWT, python-dotenv
-- **Database:** PostgreSQL (via `psycopg2`)
-- **Resume parsing:** `pdfjs-dist` (PDF) + plain text support
+### Backend
+
+- **Framework:** FastAPI with Uvicorn
+- **AI Integration:** OpenAI SDK (GPT-4)
+- **Authentication:** PyJWT for JWT token management
+- **Database:** PostgreSQL with psycopg2-binary
+- **Environment:** python-dotenv for configuration
+
+### Frontend
+
+- **Framework:** React 19 with Vite
+- **Styling:** Tailwind CSS
+- **Routing:** React Router v6
+- **HTTP Client:** Axios
+- **PDF Processing:** pdfjs-dist for resume parsing
+- **Image Handling:** Canvas API for profile photo cropping
 
 ## Features
 
-- Username/password authentication with JWT
-- Protected routes (`/`, `/history`, `/profile`)
-- AI interview sessions:
-  - Interview types: Technical, Behavioral, Mixed
-  - Difficulty: Entry Level, Mid Level, Senior Level
-  - Question count: 3–10
-  - Tailored prompting using resume + optional job description
-- Chat-style interview interaction with session completion detection
-- Interview history with expandable message timeline
-- Profile management:
-  - Update username/password
-  - Upload/change profile photo (client-side crop)
-  - Delete account
-- Resume management:
-  - Upload PDF/TXT
-  - List, view, delete saved resumes
+### 🔐 Authentication & Authorization
+
+- **User Registration:** Secure signup with username and password (minimum 6 characters)
+- **Login System:** JWT-based authentication with token storage
+- **Password Security:** Salted password hashing using SHA-256
+- **Protected Routes:** Automatic redirect to login for unauthorized access
+
+### 🎯 AI-Powered Interview Sessions
+
+- **Interview Types:**
+  - Technical (coding, algorithms, system design)
+  - Behavioral (soft skills, situational questions)
+  - Mixed (combination of both)
+- **Difficulty Levels:**
+  - Entry Level
+  - Mid Level
+  - Senior Level
+- **Customization:**
+  - Variable question count (3-10 questions)
+  - Resume-based personalization
+  - Optional job description for targeted practice
+- **Real-time Interaction:**
+  - Chat-style interface with AI interviewer
+  - Context-aware follow-up questions
+  - Automatic session completion detection
+  - Streaming responses for natural conversation flow
+
+### 📊 History & Analytics
+
+- **Session History:** View all past interview sessions
+- **Detailed Timeline:** Expandable message history for each session
+- **Statistics Dashboard:** Track your interview practice progress
+- **Session Metadata:** Date, time, interview type, difficulty, and status
+
+### 👤 Profile Management
+
+- **Account Settings:**
+  - Update username
+  - Change password
+  - Delete account with confirmation
+- **Profile Photo:**
+  - Upload custom profile image
+  - Client-side image cropping with zoom and pan
+  - Circular 256×256 output for consistent display
+  - Base64 storage in database
+
+### 📄 Resume Management
+
+- **Multi-Format Support:**
+  - PDF upload with text extraction (via pdfjs-dist)
+  - Plain text (.txt) file support
+- **Resume Library:**
+  - Store multiple resumes
+  - View resume content
+  - Delete unwanted resumes
+- **Interview Integration:** Select resume for context-aware interview questions
 
 ## Project Structure
 
@@ -141,65 +255,359 @@ Frontend app: `http://localhost:5173`
 
 ## API Overview
 
-### Auth
+### Authentication Endpoints
 
-- `POST /auth/signup`
-- `POST /auth/login`
+- **`POST /auth/signup`** - Register new user
+  - Body: `{ username, password }`
+  - Returns: JWT token and username
+- **`POST /auth/login`** - Authenticate user
+  - Body: `{ username, password }`
+  - Returns: JWT token and username
 
-### Interview
+### Interview Endpoints
 
-- `POST /interview/start`
-- `POST /interview/chat`
-- `POST /interview/message`
-- `PATCH /interview/session/{session_id}/status`
+- **`POST /interview/start`** - Create new interview session
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ interview_type, difficulty, num_questions, resume_text?, job_description? }`
+  - Returns: `{ session_id, message }`
+- **`POST /interview/chat`** - Interactive chat with AI interviewer
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ session_id, messages[], interview_type, difficulty, num_questions, resume_text?, job_description? }`
+  - Returns: Streaming AI response
+- **`POST /interview/message`** - Add message to session history
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ session_id, role, content }`
+  - Returns: Success confirmation
+- **`PATCH /interview/session/{session_id}/status`** - Update session status
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ status: "completed" | "in_progress" }`
+  - Returns: Success confirmation
 
-### History
+### History Endpoints
 
-- `GET /history/sessions`
-- `GET /history/session/{session_id}`
-- `GET /history/stats`
+- **`GET /history/sessions`** - Retrieve all user sessions
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Array of session objects with metadata
+- **`GET /history/session/{session_id}`** - Get specific session details
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Session data with full message history
+- **`GET /history/stats`** - Get user statistics
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Total sessions, completed count, and recent activity
 
-### Profile
+### Profile Endpoints
 
-- `GET /profile`
-- `PUT /profile/username`
-- `PUT /profile/password`
-- `DELETE /profile`
+- **`GET /profile`** - Get user profile information
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: `{ username, profile_photo? }`
+- **`PUT /profile/username`** - Update username
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ new_username }`
+  - Returns: New JWT token
+- **`PUT /profile/password`** - Change password
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ current_password, new_password }`
+  - Returns: Success confirmation
+- **`POST /profile/photo`** - Upload profile photo
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ photo: "data:image/jpeg;base64,..." }`
+  - Returns: Success confirmation
+- **`DELETE /profile`** - Delete user account
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Success confirmation
 
-### Resumes
+### Resume Endpoints
 
-- `GET /profile/resumes`
-- `POST /profile/resumes`
-- `GET /profile/resumes/{resume_id}`
-- `DELETE /profile/resumes/{resume_id}`
+- **`GET /profile/resumes`** - List all user resumes
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Array of resume metadata (id, name, upload date)
+- **`POST /profile/resumes`** - Upload new resume
+  - Headers: `Authorization: Bearer <token>`
+  - Body: `{ name, content }`
+  - Returns: `{ resume_id }`
+- **`GET /profile/resumes/{resume_id}`** - Get specific resume content
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Resume text content
+- **`DELETE /profile/resumes/{resume_id}`** - Delete resume
+  - Headers: `Authorization: Bearer <token>`
+  - Returns: Success confirmation
 
-## Database Tables
+## Database Schema
 
-Tables are auto-created by `InterviewDatabase.init_database()`:
+Tables are automatically created by `InterviewDatabase.init_database()` on application startup:
 
-- `users`
-- `interview_sessions`
-- `chat_messages`
-- `resumes`
+### `users`
 
-## Known Current Behavior
+- `user_id` (SERIAL, PRIMARY KEY) - Unique user identifier
+- `username` (TEXT, UNIQUE, NOT NULL) - Unique username
+- `password_hash` (TEXT) - SHA-256 hashed password
+- `salt` (TEXT) - Random salt for password hashing
+- `profile_photo` (TEXT) - Base64-encoded profile image
+- `created_at` (TIMESTAMP WITH TIME ZONE) - Account creation timestamp (UTC)
 
-- Interview completion is inferred when AI response contains both "thank you" and "overall".
-- Frontend sends token from `localStorage` on every API request.
-- If no token exists, app redirects to `/login`.
+### `interview_sessions`
+
+- `session_id` (SERIAL, PRIMARY KEY) - Unique session identifier
+- `user_id` (INTEGER, FOREIGN KEY) - References users(user_id)
+- `interview_type` (TEXT) - Type: Technical, Behavioral, or Mixed
+- `difficulty` (TEXT) - Level: Entry, Mid, or Senior
+- `num_questions` (INTEGER) - Number of questions in session
+- `started_at` (TIMESTAMP WITH TIME ZONE) - Session start time (UTC)
+- `completed_at` (TIMESTAMP WITH TIME ZONE) - Session completion time (UTC)
+- `status` (TEXT) - Session status: 'in_progress' or 'completed'
+
+### `chat_messages`
+
+- `message_id` (SERIAL, PRIMARY KEY) - Unique message identifier
+- `session_id` (INTEGER, FOREIGN KEY) - References interview_sessions(session_id)
+- `role` (TEXT) - Message sender: 'user' or 'assistant'
+- `content` (TEXT) - Message content
+- `timestamp` (TIMESTAMP WITH TIME ZONE) - Message timestamp (UTC)
+
+### `resumes`
+
+- `resume_id` (SERIAL, PRIMARY KEY) - Unique resume identifier
+- `user_id` (INTEGER, FOREIGN KEY) - References users(user_id)
+- `name` (TEXT) - Resume file name
+- `content` (TEXT) - Extracted text content from resume
+- `uploaded_at` (TIMESTAMP WITH TIME ZONE) - Upload timestamp (UTC)
+
+All timestamp fields use UTC timezone for consistency across different server locations.
+
+## Frontend Pages
+
+### `/login` - Login.jsx
+
+- Tab-based interface for login and signup
+- Form validation (minimum 6 character password, password confirmation)
+- Error handling with user-friendly messages
+- Modern design with hero section and branding
+- Auto-navigation to home on successful authentication
+
+### `/` - Interview.jsx
+
+- Main interview interface
+- Interview configuration panel:
+  - Type selector (Technical/Behavioral/Mixed)
+  - Difficulty selector (Entry/Mid/Senior)
+  - Question count slider (3-10)
+  - Resume selection dropdown
+  - Job description text area
+- Real-time chat interface with AI interviewer
+- Message history display
+- Session management and completion detection
+- Responsive design for mobile and desktop
+
+### `/history` - History.jsx
+
+- List of all past interview sessions
+- Session cards with metadata:
+  - Interview type and difficulty
+  - Date and time
+  - Number of questions
+  - Completion status
+- Expandable message timeline for each session
+- Session statistics dashboard
+- Empty state for new users
+
+### `/profile` - Profile.jsx
+
+- User information display
+- Profile photo management:
+  - Upload with drag-and-drop or file picker
+  - Interactive crop tool with zoom and pan
+  - Circular output preview
+- Account settings:
+  - Username update
+  - Password change
+  - Account deletion with confirmation
+- Resume management section:
+  - Upload PDF or TXT files
+  - View uploaded resumes
+  - Delete resumes
+  - PDF text extraction preview
+- Modern tabbed interface with smooth transitions
+
+### Shared Components
+
+#### `Layout.jsx`
+
+- Navigation bar with logo and user menu
+- Responsive navigation menu
+- Logout functionality
+- Consistent layout wrapper for all protected routes
+
+## Architecture & Design Decisions
+
+### Backend Architecture
+
+- **FastAPI Framework:** Chosen for high performance, automatic API documentation, and modern Python async support
+- **PostgreSQL Database:** Scalable, reliable ACID-compliant database for production-ready data storage
+- **JWT Authentication:** Stateless authentication enabling horizontal scaling
+- **OpenAI Integration:** Direct API integration for real-time AI responses
+- **Modular Design:** Separation of concerns with `database.py` handling all data operations
+
+### Frontend Architecture
+
+- **React 19:** Latest React features with improved performance and developer experience
+- **Vite Build Tool:** Lightning-fast development server and optimized production builds
+- **Tailwind CSS:** Utility-first CSS for rapid UI development and consistent design
+- **React Router:** Client-side routing for seamless navigation
+- **Axios:** HTTP client with interceptors for automatic token injection
+
+### Security Considerations
+
+- **Password Hashing:** SHA-256 with unique salts per user
+- **JWT Tokens:** Secure token-based authentication with expiration
+- **Protected Routes:** Frontend and backend route guards
+- **CORS Configuration:** Restricted to specific origins
+- **Environment Variables:** Sensitive keys stored in `.env` files
+
+### User Experience Decisions
+
+- **Streaming Responses:** Real-time AI responses for natural conversation feel
+- **Session History:** Complete interview transcripts for review and learning
+- **Profile Customization:** Personal profile photos for user engagement
+- **Responsive Design:** Mobile-friendly interface for practice on-the-go
+- **Resume Integration:** Context-aware questions based on uploaded resumes
+
+## Known Behavior & Implementation Details
+
+### Interview Completion Detection
+
+- Interview is marked as complete when AI response contains both "thank you" and "overall"
+- This heuristic approach detects when the interviewer provides closing remarks
+- Users can also manually end sessions
+
+### Authentication Flow
+
+- Frontend stores JWT token in `localStorage` on successful login
+- Token is automatically included in all API requests via Axios interceptors
+- Expired or missing tokens redirect users to login page
+- Token contains username and expiration information
+
+### Resume Processing
+
+- PDF files are processed using `pdfjs-dist` library for text extraction
+- Plain text (.txt) files are stored directly
+- Resume content is used to generate personalized interview questions
+- Multiple resumes can be stored per user
+
+### Database Best Practices
+
+- All timestamps stored in UTC for consistency
+- Foreign key constraints maintain referential integrity
+- Indexes on user_id and session_id for query performance
+- Cascading deletes ensure clean data removal
+
+## Future Enhancements
+
+### Planned Features
+
+- 🎤 **Voice Interview Mode:** Practice with speech-to-text and text-to-speech
+- 📊 **Advanced Analytics:** Performance metrics, improvement trends, and weak areas identification
+- 🤖 **AI Feedback:** Detailed feedback on answer quality, communication style, and areas to improve
+- 📱 **Mobile App:** Native iOS and Android applications
+- 🌐 **Multi-language Support:** Interviews in multiple languages
+- 👥 **Collaborative Features:** Share sessions with mentors or coaches for review
+- 🎯 **Industry Templates:** Pre-configured interview templates for specific industries
+- 📧 **Email Notifications:** Session reminders and progress reports
+- 💡 **Smart Recommendations:** AI-suggested areas to focus on based on performance
+- 🏆 **Gamification:** Achievement badges and progress milestones
+
+### Technical Improvements
+
+- Containerization with Docker for easier deployment
+- CI/CD pipeline for automated testing and deployment
+- Rate limiting and API throttling
+- Caching layer for improved performance
+- WebSocket support for real-time collaboration
+- Export interview sessions to PDF
+- Integration with calendar apps
+- OAuth authentication (Google, LinkedIn, GitHub)
+
+## Contributing
+
+We welcome contributions! This project was developed as a collaborative effort to help job seekers worldwide. If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## Development Notes
 
-- Frontend lint:
+### Frontend Development
+
+- Lint code:
 
 ```bash
 cd frontend
 npm run lint
 ```
 
-- Build frontend:
+- Build for production:
 
 ```bash
 cd frontend
 npm run build
 ```
+
+- Preview production build:
+
+```bash
+cd frontend
+npm run preview
+```
+
+### Backend Development
+
+- Run with auto-reload:
+
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+- Access API documentation:
+  - Swagger UI: `http://localhost:8000/docs`
+  - ReDoc: `http://localhost:8000/redoc`
+
+### Database Management
+
+- Connect to PostgreSQL:
+
+```bash
+psql -U username -d database_name
+```
+
+- View tables:
+
+```sql
+\dt
+```
+
+- View table schema:
+
+```sql
+\d table_name
+```
+
+## License
+
+This project is open-source and available for educational purposes.
+
+## Support & Contact
+
+If you encounter any issues or have questions:
+
+- Open an issue on GitHub
+- Check existing issues for solutions
+- Review the documentation in this README
+
+---
+
+**Made with ❤️ by Hemin, Kavya, and Nithya**
+
+_Empowering job seekers to nail their next interview, one practice session at a time._
