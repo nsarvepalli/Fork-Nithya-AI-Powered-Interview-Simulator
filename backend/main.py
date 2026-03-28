@@ -12,7 +12,7 @@ import datetime
 
 load_dotenv()
 
-app = FastAPI(title="HireReady API")
+app = FastAPI(title="HireReady API", root_path="/api")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 db = InterviewDatabase()
 security = HTTPBearer()
@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "hireready-secret-key-2026")
 # ─── CORS ─────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
