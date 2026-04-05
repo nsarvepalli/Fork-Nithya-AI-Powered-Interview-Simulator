@@ -179,6 +179,10 @@ export default function Interview() {
       setStarted(true);
     } catch (err) {
       console.error(err);
+      alert(
+        err.response?.data?.detail ||
+          "Failed to start the interview. Check if your API keys (like OPENAI_API_KEY) are configured on Vercel."
+      );
     } finally {
       setLoading(false);
     }
